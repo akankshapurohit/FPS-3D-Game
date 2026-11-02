@@ -257,35 +257,147 @@ function buildEnemy() {
     roughness: 0.5,
     metalness: 0.2,
   });
+  const armor = new THREE.MeshStandardMaterial({
+    color: 0x3f4b57,
+    roughness: 0.55,
+    metalness: 0.25,
+  });
+  const accent = new THREE.MeshStandardMaterial({
+    color: 0xff8a94,
+    emissive: 0xff3344,
+    emissiveIntensity: 1.5,
+  });
 
-  const torso = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.9, 0.42), skin);
-  torso.position.y = 1.15;
+  const torso = new THREE.Mesh(new THREE.BoxGeometry(0.76, 0.9, 0.44), skin);
+  torso.position.y = 1.18;
   torso.castShadow = true;
-  const head = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.38, 0.38), dark);
-  head.position.y = 1.78;
+
+  const chestPlate = new THREE.Mesh(new THREE.BoxGeometry(0.54, 0.48, 0.18), armor);
+  chestPlate.position.set(0, 1.18, 0.2);
+  chestPlate.castShadow = true;
+
+  const waist = new THREE.Mesh(new THREE.BoxGeometry(0.66, 0.2, 0.3), dark);
+  waist.position.y = 0.72;
+  waist.castShadow = true;
+
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.11, 0.18, 12), skin);
+  neck.position.y = 1.7;
+  neck.castShadow = true;
+
+  const head = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.42, 0.38), skin);
+  head.position.y = 1.95;
   head.castShadow = true;
-  const visor = new THREE.Mesh(
-    new THREE.BoxGeometry(0.42, 0.12, 0.14),
-    new THREE.MeshStandardMaterial({
-      color: 0xff8a94,
-      emissive: 0xff3344,
-      emissiveIntensity: 1.4,
-    })
-  );
-  visor.position.set(0, 1.8, 0.18);
-  const lamp = new THREE.PointLight(0xff5d6c, 3.4, 8);
-  lamp.position.set(0, 1.7, 0.3);
-  const lArm = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.72, 0.18), dark);
-  lArm.position.set(-0.5, 1.12, 0);
+
+  const helmet = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.18, 0.46), dark);
+  helmet.position.set(0, 2.15, 0);
+  helmet.castShadow = true;
+
+  const visor = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.12, 0.1), accent);
+  visor.position.set(0, 2.0, 0.22);
+
+  const earLeft = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.12, 0.06), skin);
+  earLeft.position.set(-0.21, 2.0, 0);
+  const earRight = earLeft.clone();
+  earRight.position.x = 0.21;
+
+  const faceDetail = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.06, 0.02), accent);
+  faceDetail.position.set(0, 1.94, 0.23);
+
+  const lamp = new THREE.PointLight(0xff5d6c, 3.8, 8);
+  lamp.position.set(0, 1.95, 0.45);
+
+  const shoulderLeft = new THREE.Mesh(new THREE.SphereGeometry(0.15, 16, 16), armor);
+  shoulderLeft.position.set(-0.5, 1.58, 0);
+  const shoulderRight = shoulderLeft.clone();
+  shoulderRight.position.x = 0.5;
+
+  const upperArmGeometry = new THREE.BoxGeometry(0.18, 0.56, 0.18);
+  const lArm = new THREE.Mesh(upperArmGeometry, dark);
+  lArm.position.set(-0.68, 1.18, 0);
+  lArm.castShadow = true;
   const rArm = lArm.clone();
-  rArm.position.x = 0.5;
-  const lLeg = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.8, 0.22), dark);
-  lLeg.position.set(-0.2, 0.4, 0);
+  rArm.position.x = 0.68;
+
+  const forearmLeft = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.54, 0.16), armor);
+  forearmLeft.position.set(-0.68, 0.68, 0.04);
+  forearmLeft.castShadow = true;
+  const forearmRight = forearmLeft.clone();
+  forearmRight.position.x = 0.68;
+
+  const handLeft = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.14, 0.14), skin);
+  handLeft.position.set(-0.68, 0.3, 0.09);
+  const handRight = handLeft.clone();
+  handRight.position.x = 0.68;
+
+  const thighGeo = new THREE.BoxGeometry(0.22, 0.72, 0.22);
+  const lLeg = new THREE.Mesh(thighGeo, dark);
+  lLeg.position.set(-0.2, 0.36, 0);
+  lLeg.castShadow = true;
   const rLeg = lLeg.clone();
   rLeg.position.x = 0.2;
 
-  enemyParts.push(torso, head, visor, lArm, rArm, lLeg, rLeg);
-  enemyGroup.add(torso, head, visor, lArm, rArm, lLeg, rLeg, lamp);
+  const shinLeft = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.66, 0.18), armor);
+  shinLeft.position.set(-0.2, -0.35, 0.04);
+  shinLeft.castShadow = true;
+  const shinRight = shinLeft.clone();
+  shinRight.position.x = 0.2;
+
+  const bootLeft = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.18, 0.4), dark);
+  bootLeft.position.set(-0.2, -0.78, 0.09);
+  const bootRight = bootLeft.clone();
+  bootRight.position.x = 0.2;
+
+  enemyParts.push(
+    torso,
+    chestPlate,
+    waist,
+    head,
+    helmet,
+    visor,
+    faceDetail,
+    shoulderLeft,
+    shoulderRight,
+    lArm,
+    rArm,
+    forearmLeft,
+    forearmRight,
+    handLeft,
+    handRight,
+    lLeg,
+    rLeg,
+    shinLeft,
+    shinRight,
+    bootLeft,
+    bootRight
+  );
+
+  enemyGroup.add(
+    torso,
+    chestPlate,
+    waist,
+    neck,
+    head,
+    helmet,
+    visor,
+    earLeft,
+    earRight,
+    faceDetail,
+    shoulderLeft,
+    shoulderRight,
+    lArm,
+    rArm,
+    forearmLeft,
+    forearmRight,
+    handLeft,
+    handRight,
+    lLeg,
+    rLeg,
+    shinLeft,
+    shinRight,
+    bootLeft,
+    bootRight,
+    lamp
+  );
   scene.add(enemyGroup);
 }
 
