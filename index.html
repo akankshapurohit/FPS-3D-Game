@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arena FPS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="game-root">
+      <canvas id="game-canvas"></canvas>
+
+      <div id="hud">
+        <div class="hud-top">
+          <div class="stat-card">
+            <span class="stat-label">You</span>
+            <div class="bar">
+              <div id="player-health" class="bar-fill player"></div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Opponent</span>
+            <div class="bar">
+              <div id="enemy-health" class="bar-fill enemy"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="crosshair" aria-hidden="true">
+          <span></span>
+        </div>
+
+        <div class="hud-bottom">
+          <p class="controls">
+            <kbd>↑</kbd> <kbd>↓</kbd> move · <kbd>←</kbd> <kbd>→</kbd> turn ·
+            <kbd>Space</kbd> shoot
+          </p>
+        </div>
+      </div>
+
+      <div id="overlay" class="overlay">
+        <div class="panel">
+          <p class="eyebrow">3D Arena</p>
+          <h1 id="overlay-title">Arena FPS</h1>
+          <p id="overlay-copy">
+            Face one computer opponent in a closed arena. Use the arrow keys to
+            move and turn. Press space to fire.
+          </p>
+          <button id="start-btn" type="button">Enter Arena</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>
