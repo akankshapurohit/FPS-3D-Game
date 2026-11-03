@@ -23,7 +23,7 @@ Arena FPS is a lightweight 3D combat game where the player controls a first-pers
 
 ## How to Run
 
-Because this is a simple front-end web game, you can run it by opening the project in a browser or serving it locally.
+Run it by opening the project in a browser or serving it locally.
 
 ### Option 1: Open directly
 
